@@ -8,16 +8,21 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Entity
 @Data
+//@ToString(exclude={"dept"})
 @AllArgsConstructor
 @NoArgsConstructor
 public class Emp {
@@ -41,5 +46,12 @@ public class Emp {
 	private Date hiredate;
 	private BigDecimal sal;
 	private BigDecimal comm;
-	private Integer deptno;
+
+	@ManyToOne(fetch=FetchType.LAZY)
+//	@ManyToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name="deptno")
+	private Dept dept;
 }
+
+
+
